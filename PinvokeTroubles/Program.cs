@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
-namespace PinvokeTroubles
+struct MyFlags
 {
-    class Program
+    public ushort mBits;
+};
+ 
+class Program
+{
+    [DllImport("NativeLib.dll", CallingConvention = CallingConvention.Cdecl)]
+    static extern void testmf(MyFlags val);
+    [DllImport("NativeLib.dll", CallingConvention = CallingConvention.Cdecl)]
+    static extern void testmf2(MyFlags val);
+
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-        }
+        testmf2(new MyFlags(){mBits = 42});
+        testmf(new MyFlags(){mBits = 42}); //mem read acccess violation
+        Console.ReadKey();
     }
 }
