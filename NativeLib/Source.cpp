@@ -23,5 +23,5 @@ extern "C" __declspec(dllexport) void testmf2(MyFlags2 flags){
 }
 
 extern "C" __declspec(dllexport) void testmf3(char flags[sizeof MyFlags]){
-	printf("%d", (*(MyFlags*)&flags).mBits);
+	printf("%d", ((MyFlags*)flags)->mBits);
 }
