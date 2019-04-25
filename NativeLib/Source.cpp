@@ -21,3 +21,7 @@ struct MyFlags2
 extern "C" __declspec(dllexport) void testmf2(MyFlags2 flags){
 	printf("%d", flags.mBits);
 }
+
+extern "C" __declspec(dllexport) void testmf3(char flags[sizeof MyFlags]){
+	printf("%d", (*(MyFlags*)&flags).mBits);
+}
